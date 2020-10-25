@@ -5,21 +5,21 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D29B3BA9-3077-4B87-A638-C4F653FBA6D1}"
 	ProjectSection(SolutionItems) = preProject
-		Arhivos\background.js = Arhivos\background.js
-		Arhivos\manifest.json = Arhivos\manifest.json
-		Arhivos\options.html = Arhivos\options.html
-		Arhivos\options.js = Arhivos\options.js
-		Arhivos\popup.html = Arhivos\popup.html
-		Arhivos\popup.js = Arhivos\popup.js
-		Arhivos\unclutterer.js = Arhivos\unclutterer.js
+		Archivos\background.js = Archivos\background.js
+		Archivos\manifest.json = Archivos\manifest.json
+		Archivos\options.html = Archivos\options.html
+		Archivos\options.js = Archivos\options.js
+		Archivos\popup.html = Archivos\popup.html
+		Archivos\popup.js = Archivos\popup.js
+		Archivos\unclutterer.js = Archivos\unclutterer.js
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{B4D866A9-E530-4896-A132-694A044060A6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{9A717C06-D708-40C7-827E-70B600F42951}"
 	ProjectSection(SolutionItems) = preProject
-		Arhivos\images\unclutterer-twitter-128.png = Arhivos\images\unclutterer-twitter-128.png
-		Arhivos\images\unclutterer-twitter-16.png = Arhivos\images\unclutterer-twitter-16.png
-		Arhivos\images\unclutterer-twitter-32.png = Arhivos\images\unclutterer-twitter-32.png
-		Arhivos\images\unclutterer-twitter-48.png = Arhivos\images\unclutterer-twitter-48.png
+		Archivos\images\unclutterer-twitter-128.png = Archivos\images\unclutterer-twitter-128.png
+		Archivos\images\unclutterer-twitter-16.png = Archivos\images\unclutterer-twitter-16.png
+		Archivos\images\unclutterer-twitter-32.png = Archivos\images\unclutterer-twitter-32.png
+		Archivos\images\unclutterer-twitter-48.png = Archivos\images\unclutterer-twitter-48.png
 	EndProjectSection
 EndProject
 Global
@@ -27,7 +27,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{B4D866A9-E530-4896-A132-694A044060A6} = {D29B3BA9-3077-4B87-A638-C4F653FBA6D1}
+		{9A717C06-D708-40C7-827E-70B600F42951} = {D29B3BA9-3077-4B87-A638-C4F653FBA6D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE681132-B1A2-48AA-A4EE-A57E4F65FF32}
