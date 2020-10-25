@@ -1,3 +1,5 @@
+<h1>Twitter Unclutterer Chrome Extension</h1>
+
 Unclutter your twitter timeline for a cleaner and better experience!
 
 * Hide tweets with reposted links.
