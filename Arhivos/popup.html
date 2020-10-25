@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        /* Toogle Switch - Tomado de https://www.w3schools.com/howto/howto_css_switch.asp. */
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        /* Toogle Switch> */
+
+        .tít-opción {
+            margin-right: 10px;
+            width: 240px;
+            font-weight: bold;
+            vertical-align: central;
+            text-align: right;
+        }
+
+        .cn-opción {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 15px;
+            margin-right: 15px;
+            margin-left: 15px;
+            justify-content: space-between;
+        }
+
+        .cn-título {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .negrita {
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div style="width: 360px; margin-bottom: 40px;">
+
+        <div class="cn-título">
+            <img src="/images/unclutterer-twitter-48.png" style="height: 48px; width: 48px; margin: 15px;" />
+            <h1>Twitter Unclutterer</h1>
+        </div>
+
+        <div class="cn-opción">
+            <span class="tít-opción">Hide tweets with reposted links</span>
+            <label class="switch">
+                <input id="ChkEsconderTweetsER" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="cn-opción">
+            <span class="tít-opción">Show hidden tweet reason</span>
+            <label class="switch">
+                <input id="ChkMostrarMensajeTweetOculto" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="cn-opción negrita" style="margin-top: 25px; margin-bottom: 25px">
+            <span>Allow a tweet with a reposted link</span>
+            <span>
+                <select id="SlcMesesOcultoEnlaceVisto">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                </select>
+            </span>
+
+            <span id="MesesOcultoEnlaceVistoMonthsPlural" style="display: none;">
+                months later
+            </span>
+
+            <span id="MesesOcultoEnlaceVistoMonthsSingular">
+                month later
+            </span>
+
+        </div>
+
+        <div>
+            <span id="SpAlertaMuchosMeses" style="color: red; display: none; text-align: center; font-weight: bold">Performance may be affected</span>
+        </div>
+
+        <div class="cn-opción negrita" style="margin-top: 25px; margin-bottom: 25px">
+            <span>Limit tweets visibility to </span>
+            <span>
+                <select id="SlcMaximosTweetsDiariosPorUsuario">
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="8">8</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="70">70</option>
+                    <option value="100">100</option>
+                    <option value="2400">2400</option>
+                </select>
+            </span>
+            <span>daily tweets per user</span>
+
+        </div>
+
+        <hr />
+
+        <div class="cn-opción">
+            <span class="tít-opción">Hide 'Who to follow'</span>
+            <label class="switch">
+                <input id="ChkEsconderASeguir" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="cn-opción">
+            <span class="tít-opción">Hide trends</span>
+            <label class="switch">
+                <input id="ChkEsconderTendencias" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <hr />
+
+        <div class="cn-opción">
+            <span class="tít-opción">Alert if timeline is not chronological</span>
+            <label class="switch">
+                <input id="ChkAvisarNoCronologico" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+    </div>
+
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+
+        <div style="text-align: right">
+            Refresh the page after any change.
+        </div>
+
+        <div>
+            By <a href="https://github.com/vixark">Vixark</a>
+        </div>
+    </div>
+
+    <!--<div>
+        <button id="BtnPruebas">Prueba</button>
+    </div>-->
+
+    <script src="popup.js"></script>
+
+</body>
+</html>
