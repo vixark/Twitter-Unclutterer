@@ -1,7 +1,7 @@
 {
   "name": "Twitter Unclutterer",
   "version": "1.0",
-  "description": "Many twitter accounts frequently recycle and repost their content, they do it to reach more viewers, but if you already saw that content, you don't need to see it again. If you follow sites that post many articles, they may spam you with the same article over and over. If you are tired of that you can use 'Twitter Unclutterer' to hide the tweets with repeated links and reduce the clutter in your twitter timeline. Other users post so many tweets at day but you still don't want to unfollow them, you can use 'Twitter Unclutterer' to limit the maximum amount of daily tweets you see from any account. Besides, you can hide the 'Who to follow' and 'Trends' sections, and you get notified if twitter changes your timeline to 'Top Tweets' instead of chronological. Works for Twitter in english and spanish, if you want support in other language let me know and I can do it.",
+  "description": "Unclutter twitter for a cleaner experience! Hide tweets with reposted links, limit daily tweets visibility per user and more.",
   "permissions": [ "activeTab", "declarativeContent", "storage", "unlimitedStorage" ],
   "background": {
     "scripts": [ "background.js" ],

@@ -67,32 +67,34 @@ var observadorMutaciones = new MutationObserver(function (mutaciones) {
             var nodos = mutación.addedNodes;
             for (var j = nodos.length - 1; j >= 0; j--) {
 
-                var nodo = nodos[j];
+                var nodo = nodos[j];  
                 if (nodo.tagName === "DIV" || nodo.tagName === "div") {
-
+                    
                     var artículos = nodo.querySelectorAll("article.css-1dbjc4n");
+                    if (nodo.classList.contains("r-18bvks7")) { // Es necesario detectar también este contenedor porque se puede tratar de una carta con imagen y enlace que se suele añadir después de añadir el article (que se añade preliminarmente sin carta y por lo tanto no se puede obtener la url de este). En estos casos se detecta la adición de la carta y se pasa el article tataratataratataraabuelo completo (incluyendo la carta).<div aria-hidden="true" class="css-1dbjc4n r-1ila09b r-pm2fo r-zmljjp r-rull8r r-qklmqi r-1adg3ll" data-testid="card.layoutLarge.media">.
+                        artículos = [nodo.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement];
+                    }
+
                     if (artículos.length > 0) { // Es un div con un nuevo tweet.
 
-                        if (artículos.length === 1) {
+                        artículos.forEach(artículo => { // Aunque no es usual que coincidan varios artículos en una sola mutación, se permite para abarcar todos los posibles casos.
 
-                            var respuesta2 = EsconderTweetsPorMáximosDiarios(artículos[0], tweetsProcesadosHoy, tweetsPorUsuario, maximosTweetsPorUsuario);
+                            var respuesta2 = EsconderTweetsPorMáximosDiarios(artículo, tweetsProcesadosHoy, tweetsPorUsuario, maximosTweetsPorUsuario);
                             var ocultarTweet2 = respuesta2[0];
                             tweetsPorUsuario = respuesta2[1];
                             tweetsProcesadosHoy = respuesta2[2];
                             if (!ocultarTweet2) {
 
-                                var respuesta3 = EsconderTweetsEnlacesRepetidos(artículos[0], enlacesVistos, enlacesProcesadosHoy);
+                                var respuesta3 = EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesadosHoy);
                                 var ocultarTweet3 = respuesta3[0];
                                 enlacesVistos = respuesta3[1];
                                 enlacesProcesadosHoy = respuesta3[2];
 
                             }
-                            
+
                             guardarObjetos = true;
-                                
-                        } else {
-                            // Caso no controlado que sucede pocas veces. No se esperaba que un tweet tuviera dos artículos.
-                        }
+
+                        });
 
                     } else {
 
