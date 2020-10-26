@@ -1,6 +1,6 @@
 {
   "name": "Twitter Unclutterer",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Unclutter twitter for a cleaner experience! Hide tweets with reposted links, limit daily tweets visibility per user and more.",
   "permissions": [ "activeTab", "declarativeContent", "storage", "unlimitedStorage" ],
   "background": {
