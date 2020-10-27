@@ -85,7 +85,7 @@ var observadorMutaciones = new MutationObserver(function (mutaciones) {
                             tweetsProcesadosHoy = respuesta2[2];
                             if (!ocultarTweet2) {
 
-                                var respuesta3 = EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesadosHoy);
+                                var respuesta3 = EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesadosHoy, tweetsPorUsuario);
                                 var ocultarTweet3 = respuesta3[0];
                                 enlacesVistos = respuesta3[1];
                                 enlacesProcesadosHoy = respuesta3[2];
@@ -423,7 +423,7 @@ function EsconderTweetsPorMáximosDiarios(artículo, tweetsProcesadosHoy, tweets
 } // EsconderTweetsPorMáximosDiarios>
 
 
-function EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesadosHoy) {
+function EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesadosHoy, tweetsPorUsuario) {
 
     if (!EsconderTweetsER) return [false, enlacesVistos, enlacesProcesadosHoy];
     
@@ -451,14 +451,14 @@ function EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesa
             if (hrefUrl.indexOf("https://twitter.com") !== 0) { // Si no empieza por https://twitter.com es un enlace externo que se debe supervisar. Si empieza por https://twitter.com es un enlace interno, posiblemente a un nombre de usuario o hashtag, en estos casos no se ocultan los tweets.
 
                 var títuloUrl = LimpiarUrl(enlace.title); // También una url y puede ser diferente a la que está en href. La de href puede ser de t.co y la de título la directa. 
-                var respuesta2 = IntentarOcultarTweet(hrefUrl, enlacesVistos, id, artículo, usuario, enlacesProcesadosHoy, títuloUrl);
+                var respuesta2 = IntentarOcultarTweet(hrefUrl, enlacesVistos, id, artículo, usuario, enlacesProcesadosHoy, títuloUrl, tweetsPorUsuario);
                 tweetOculto = respuesta2[0];
                 enlacesVistos = respuesta2[1];
                 enlacesProcesadosHoy = respuesta2[2];
 
                 if (!tweetOculto && títuloUrl.indexOf("http") === 0) {
 
-                    var respuesta3 = IntentarOcultarTweet(títuloUrl, enlacesVistos, id, artículo, usuario, enlacesProcesadosHoy, títuloUrl); // Puede ser vacío en el caso de los enlaces con imagen.  
+                    var respuesta3 = IntentarOcultarTweet(títuloUrl, enlacesVistos, id, artículo, usuario, enlacesProcesadosHoy, títuloUrl, tweetsPorUsuario); // Puede ser vacío en el caso de los enlaces con imagen.  
                     tweetOculto = respuesta3[0];
                     enlacesVistos = respuesta3[1];
                     enlacesProcesadosHoy = respuesta3[2];
@@ -474,6 +474,18 @@ function EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesa
     return [tweetOculto, enlacesVistos, enlacesProcesadosHoy];
 
 } /* EsconderTweetsEnlacesRepetidos> */
+
+
+function RestarTweetPorUsuario(usuario, tweetsPorUsuario) {
+
+    for (var k = 0; k < tweetsPorUsuario.length; k++) { // Se hace con for por rendimiento https://nikitahl.com/how-to-find-an-item-in-a-javascript-array/.
+        if (tweetsPorUsuario[k].Usuario === usuario) {
+            tweetsPorUsuario[k].Cantidad--;
+            break;
+        }
+    }
+
+} // RestarTweetPorUsuario>
 
 
 function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usuario, enlacesProcesadosHoy, urlTítulo) { // Obtiene el TweetID del tweet donde fue visto por primera vez el enlace. Devuelve verdadero si se escondió el tweet.
@@ -575,6 +587,8 @@ function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usua
         artículo.remove();
 
     }
+
+    if (ocultarTweet) RestarTweetPorUsuario(usuario, tweetsPorUsuario); // Si el tweet fue oculto por enlace ya visto no se tiene en cuenta para la regla de máximos tweets diarios.
 
     return [ocultarTweet, enlacesVistos, enlacesProcesadosHoy];
 
