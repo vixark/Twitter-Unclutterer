@@ -190,6 +190,13 @@ var observadorMutaciones = new MutationObserver(function (mutaciones) {
                                                                                             var enlacesElementosExtra = nodo.querySelectorAll("a[href*='connect_people'], a[href*='topics_selector']");
                                                                                             if (enlacesElementosExtra.length > 0) {
                                                                                                 if (esconderASeguirEfectivo) enlacesElementosExtra.forEach(enlaceElementoExtra => { enlaceElementoExtra.parentElement.remove(); }); // Normalmente es 1 pero se hace el código para que pudieran ser varios.
+                                                                                            } else {
+
+                                                                                                var enlacesASeguirTimeline = nodo.querySelectorAll("a.r-1j3t67a"); // En pocas ocasiones se muestra en twitter un elemento con tópicos a seguir y cuentas asociadas a esos tópicos. Se prefiere el selector r-1j3t67a porque este permite seleccionar tanto las sugerencias como el elemento 'See more'. El objeto es así   <div style="position: absolute; width: 100%; transform: translateY(942.4px); transition: transform 0.15s linear 0s;"><a href="/i/lists/35609614" role="link" data-focusable="true" class="css-4rbku5 css-18t94o4 css-1dbjc4n r-yfoy6g r-1ila09b r-qklmqi r-1loqt21 r-1ny4l3l r-1j3t67a r-1w50u8q r-o7ynqc r-6416eg">
+                                                                                                if (enlacesASeguirTimeline.length > 0) {
+                                                                                                    if (esconderASeguirEfectivo) enlacesASeguirTimeline.forEach(enlaceASeguirTimeline => { enlaceASeguirTimeline.parentElement.remove(); });
+                                                                                                }
+
                                                                                             }
      
                                                                                         }
