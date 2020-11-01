@@ -488,7 +488,7 @@ function RestarTweetPorUsuario(usuario, tweetsPorUsuario) {
 } // RestarTweetPorUsuario>
 
 
-function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usuario, enlacesProcesadosHoy, urlTítulo) { // Obtiene el TweetID del tweet donde fue visto por primera vez el enlace. Devuelve verdadero si se escondió el tweet.
+function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usuario, enlacesProcesadosHoy, urlTítulo, tweetsPorUsuario) { // Obtiene el TweetID del tweet donde fue visto por primera vez el enlace. Devuelve verdadero si se escondió el tweet.
 
     // Omisión de ocultado de dominios
     var partes = url.split("/");
@@ -531,12 +531,13 @@ function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usua
         }
 
         enlacesProcesadosHoy.push({ TweetID: tweetIDActual, Enlace: url, Ocultar: ocultarTweet, Razon: "EnlaceYaVisto", TweetIDOriginal: tweetID });
-        
+        if (ocultarTweet) RestarTweetPorUsuario(usuario, tweetsPorUsuario); // Si el tweet fue oculto por enlace ya visto no se tiene en cuenta para la regla de máximos tweets diarios. Se hace en este punto para evitar que se reste cada vez que se oculta.
+
     } else {
 
         ocultarTweet = ocultarTweetEnlaceProcesadoHoy;
-        tweetID = tweetIDOriginalYaProcesado;
-        
+        tweetID = tweetIDOriginalYaProcesado;      
+ 
     }
 
     if (ocultarTweet) {
@@ -587,8 +588,6 @@ function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usua
         artículo.remove();
 
     }
-
-    if (ocultarTweet) RestarTweetPorUsuario(usuario, tweetsPorUsuario); // Si el tweet fue oculto por enlace ya visto no se tiene en cuenta para la regla de máximos tweets diarios.
 
     return [ocultarTweet, enlacesVistos, enlacesProcesadosHoy];
 
