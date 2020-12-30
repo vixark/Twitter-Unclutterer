@@ -596,7 +596,7 @@ function IntentarOcultarTweet(url, enlacesVistos, tweetIDActual, artículo, usua
 
 function LimpiarUrl(url) {
 
-    if (url.contiene("facebook.com")) { // Aquí se deben añadir todos sitios que usen parámetros para cambiar el contenido.
+    if (url.contiene("facebook.com") || url.contiene("youtube.com")) { // Aquí se deben añadir todos sitios que usen parámetros para cambiar el contenido.
 
         var partes = url.split("#"); // No se limpia por parámetros porque los sitios los pueden usar para variar el contenido, por ejemplo https://m.facebook.com/story.php.
         return partes[0];
