@@ -106,6 +106,7 @@ ChkMostrarMensajeTweetOculto.addEventListener('change', (event) => {
 
 //    chrome.storage.local.get(function (respuesta) {
 
+//        console.log("Prueba log");
 //        var tweetsPorUsuario = respuesta.TweetsPorUsuario;
 //        tweetsPorUsuario.push({ Usuario: "ensayo", Cantidad: 222 });
 //        chrome.storage.local.set({ TweetsPorUsuario: tweetsPorUsuario }, function () { });

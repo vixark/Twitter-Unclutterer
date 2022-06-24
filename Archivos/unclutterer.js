@@ -1,5 +1,5 @@
 ﻿
-var clasesEnlaceTweet = "a.r-111h2gw, a.r-1re7ezh, a.r-9ilb82";
+var clasesEnlaceTweet = "a.r-1q142lx"; // Estos son los enlaces que llevan a la url del tweet del tipo [Usuario]/status/[IdTweet]. 2020: "a.r-111h2gw, a.r-1re7ezh, a.r-9ilb82";  r-1re7ezh es del tema de color blanco, r-111h2gw del gris/azul y a.r-9ilb82 del negro.
 
 var EstiloNotificadorOculto = "color: #666; font-size: 9px; padding-top: 3px; padding-bottom: 3px; padding-left: 10px; padding-right: 10px; font-family: calibri; text-align: center"
 
@@ -52,7 +52,7 @@ var observadorMutaciones = new MutationObserver(function (mutaciones) {
 
     var esconderASeguirPorUrl = !(window.location.toString().contiene("followers") || window.location.toString().contiene("following"));
     var esconderASeguirEfectivo = esconderASeguirPorUrl && EsconderASeguirV;
-
+   
     chrome.storage.local.get(function (respuesta) {
 
         var tweetsProcesadosHoy = respuesta.TweetsProcesadosHoy;
@@ -332,7 +332,7 @@ function EsconderTweetsPorMáximosDiarios(artículo, tweetsProcesadosHoy, tweets
 
     var tweetID = "";
     var usuario = "";
-    var enlacesConID = artículo.querySelectorAll(clasesEnlaceTweet); // r-1re7ezh es del tema de color blanco, r-111h2gw del gris/azul y a.r-9ilb82 del negro.
+    var enlacesConID = artículo.querySelectorAll(clasesEnlaceTweet); 
     enlacesConID.forEach(enlaceConID => {
         var partes = enlaceConID.href.split("/");
         if (partes.length === 6) {
@@ -429,7 +429,7 @@ function EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesa
     
     var id = "";
     var usuario = "";
-    var enlacesConID = artículo.querySelectorAll(clasesEnlaceTweet); // r-1re7ezh es del tema de color blanco, r-111h2gw del gris/azul y a.r-9ilb82 del negro.
+    var enlacesConID = artículo.querySelectorAll(clasesEnlaceTweet);
     enlacesConID.forEach(enlaceConID => {
         var partes = enlaceConID.href.split("/");
         if (partes.length === 6) {
@@ -440,15 +440,15 @@ function EsconderTweetsEnlacesRepetidos(artículo, enlacesVistos, enlacesProcesa
 
     if (id === "") return [false, enlacesVistos, enlacesProcesadosHoy];
 
-    var enlacesEnArtículo = artículo.querySelectorAll("a.r-1n1174f, a.r-1pi2tsx"); // r-1pi2tsx es la clase del enlace con imagen. r-1n1174f es la clase de un enlace cualquiera (a otro sitio, usuario o hashtag) en un tweet.
+    var enlacesEnArtículo = artículo.querySelectorAll("a.r-poiln3, a.r-1udh08x"); // 2022: r-poiln3 es la clase del enlace normal y r-1udh08x el de las imágenes. 2020: r-1pi2tsx es la clase del enlace con imagen. r-1n1174f es la clase de un enlace cualquiera (a otro sitio, usuario o hashtag) en un tweet.
     var tweetOculto = false;
 
     enlacesEnArtículo.forEach(enlace => {
 
-        if (!tweetOculto) { // Si ya se ocultó por otro enlace no verifica los otros enlaces. No es necesario y genera errores.
+        if (!tweetOculto) { // Si ya se ocultó por otro enlace, no verifica los otros enlaces. No es necesario y genera errores.
 
             var hrefUrl = LimpiarUrl(enlace.href);      
-            if (hrefUrl.indexOf("https://twitter.com") !== 0) { // Si no empieza por https://twitter.com es un enlace externo que se debe supervisar. Si empieza por https://twitter.com es un enlace interno, posiblemente a un nombre de usuario o hashtag, en estos casos no se ocultan los tweets.
+            if (hrefUrl.indexOf("https://twitter.com") !== 0) { // Si no empieza por https://twitter.com, es un enlace externo que se debe supervisar. Si empieza por https://twitter.com es un enlace interno, posiblemente a un nombre de usuario o hashtag, en estos casos no se ocultan los tweets.
 
                 var títuloUrl = LimpiarUrl(enlace.title); // También una url y puede ser diferente a la que está en href. La de href puede ser de t.co y la de título la directa. 
                 var respuesta2 = IntentarOcultarTweet(hrefUrl, enlacesVistos, id, artículo, usuario, enlacesProcesadosHoy, títuloUrl, tweetsPorUsuario);
